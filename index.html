@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Thị Thanh Vân | QC Cơ khí & Hành trình học tập</title>
+    <meta name="description" content="Hồ sơ cá nhân của Nguyễn Thị Thanh Vân - Nhân viên QC cơ khí và Sinh viên ngành Thương mại điện tử tại UEH.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#F7F3EE',
+                            primary: '#A77C5B',
+                            dark: '#2F3A39',
+                            text: '#1F2730',
+                            muted: '#5E6471',
+                            contactStart: '#FBF8F3',
+                            contactEnd: '#EFE4D4',
+                            surface: '#FFFFFF',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif"', 'serif'],
+                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F7F3EE;
+            color: #1F2730;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        .star-container {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            top: -14%;
+            left: var(--x);
+            display: grid;
+            place-items: center;
+            width: 56px;
+            height: 56px;
+            margin-left: -28px;
+            padding: 8px;
+            border: 0;
+            border-radius: 50%;
+            background: transparent;
+            pointer-events: auto;
+            cursor: pointer;
+            color: #97836E;
+            opacity: 0.72;
+            filter: drop-shadow(0 1px 3px rgba(70, 56, 42, 0.14));
+            animation: star-fall var(--duration) linear var(--delay) infinite;
+            touch-action: manipulation;
+        }
+        .star svg {
+            width: var(--size);
+            height: var(--size);
+            overflow: visible;
+        }
+        .star:hover,
+        .star:focus-visible {
+            z-index: 2;
+            opacity: 0.95;
+            filter: drop-shadow(0 2px 6px rgba(113, 79, 52, 0.28));
+            animation-play-state: paused;
+        }
+        .star:focus-visible {
+            outline: 2px solid #6F513A;
+            outline-offset: 2px;
+        }
+        .star.is-burst {
+            z-index: 3;
+            animation-play-state: paused;
+        }
+        .star.is-burst svg {
+            animation: star-burst 420ms ease-out;
+        }
+        .star-field.is-inactive .star {
+            animation-play-state: paused;
+        }
+        .star-field.is-inactive .star.is-burst {
+            animation-play-state: paused;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #A77C5B;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle-burst 480ms ease-out forwards;
+        }
+        @keyframes star-fall {
+            0% { top: -14%; transform: translateX(0) rotate(0); }
+            50% { transform: translateX(14px) rotate(18deg); }
+            100% { top: 112%; transform: translateX(-8px) rotate(36deg); }
+        }
+        @keyframes star-fall-reduced {
+            from { top: -14%; }
+            to { top: 112%; }
+        }
+        @keyframes star-burst {
+            0% { transform: scale(1); opacity: 1; }
+            45% { transform: scale(1.35); opacity: 1; }
+            100% { transform: scale(0.82); opacity: 0.72; }
+        }
+        @keyframes sparkle-burst {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(104, 99, 90, 0.12);
+        }
+        .glass-card-dark {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(104, 99, 90, 0.12);
+            box-shadow: 0 24px 50px rgba(100, 88, 70, 0.12);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .particle {
+                animation: none !important;
+            }
+            .star {
+                animation-name: star-fall-reduced;
+                animation-duration: 24s;
+                animation-timing-function: linear;
+                animation-delay: var(--delay);
+                animation-iteration-count: infinite;
+            }
+            .star.is-burst svg {
+                animation: none;
+                filter: brightness(1.2);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-primary selection:text-brand-dark">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center h-20">
+            <a href="#" class="font-serif text-2xl font-bold text-brand-dark flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center text-sm">TV</span>
+                Thanh Vân
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#gioi-thieu" class="hover:text-brand-primary transition-colors">Giới thiệu</a>
+                <a href="#hanh-trinh" class="hover:text-brand-primary transition-colors">Hành trình</a>
+                <a href="#chuyen-mon" class="hover:text-brand-primary transition-colors">Chuyên môn</a>
+                <a href="#hoc-tap" class="hover:text-brand-primary transition-colors">Học tập</a>
+                <a href="#lien-he" class="hover:text-brand-primary transition-colors">Liên hệ</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-brand-dark text-2xl">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-light border-t border-gray-200 absolute w-full shadow-lg">
+            <div class="flex flex-col px-6 py-4 gap-4 text-sm font-medium">
+                <a href="#gioi-thieu" class="mobile-link hover:text-brand-primary">Giới thiệu</a>
+                <a href="#hanh-trinh" class="mobile-link hover:text-brand-primary">Hành trình</a>
+                <a href="#chuyen-mon" class="mobile-link hover:text-brand-primary">Chuyên môn</a>
+                <a href="#hoc-tap" class="mobile-link hover:text-brand-primary">Học tập</a>
+                <a href="#lien-he" class="mobile-link hover:text-brand-primary">Liên hệ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 w-full grid md:grid-cols-12 gap-12 items-center">
+            <!-- Text Content -->
+            <div class="md:col-span-7 z-10 reveal">
+                <p class="text-xs md:text-sm font-semibold tracking-[0.2em] text-brand-primary mb-6 uppercase">
+                    Hồ sơ cá nhân · QC Cơ khí · Sinh viên UEH
+                </p>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold leading-tight text-brand-dark mb-6">
+                    Nguyễn Thị<br>Thanh Vân
+                </h1>
+                <h2 class="text-xl md:text-2xl font-medium text-brand-text/80 mb-6 italic font-serif">
+                    "Tỉ mỉ trong từng chi tiết. Học hỏi trên từng hành trình."
+                </h2>
+                <p class="text-base md:text-lg text-brand-text/70 leading-relaxed mb-10 max-w-2xl">
+                    Tôi đang làm việc trong lĩnh vực kiểm tra chất lượng sản phẩm cơ khí và đang theo học ngành Thương mại điện tử tại UEH. Công việc hiện tại của tôi gắn liền với các dụng cụ đo, bản vẽ và những chi tiết cần được kiểm tra cẩn thận. Việc học mở thêm cho tôi những góc nhìn mới về kinh doanh trong môi trường số.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#hanh-trinh" class="px-8 py-4 bg-brand-primary text-white rounded-full font-medium hover:bg-brand-dark transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Khám phá hành trình
+                    </a>
+                    <a href="#lien-he" class="px-8 py-4 bg-transparent border border-brand-primary text-brand-primary rounded-full font-medium hover:bg-brand-primary/10 transition-all">
+                        Kết nối với tôi
+                    </a>
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-brand-dark/10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-brand-text/60 font-medium">
+                    <span>Nhật Tinh · Từ 2019</span>
+                    <span class="hidden md:inline">•</span>
+                    <span>Kiểm tra chất lượng cơ khí</span>
+                    <span class="hidden md:inline">•</span>
+                    <span>Thương mại điện tử · UEH</span>
+                </div>
+            </div>
+
+            <!-- Image/Graphics -->
+            <div class="md:col-span-5 relative reveal delay-200 hidden md:block">
+                <div class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl group animate-float">
+                    <!-- Placeholder Image (Generated from placehold.co or unsplash source) -->
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" alt="Cơ khí chính xác" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-brand-dark/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                    
+                    <!-- Decorative Tech Lines -->
+                    <svg class="absolute bottom-0 right-0 w-32 h-32 text-brand-primary opacity-50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M100 50 L50 100 L0 50" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="50" cy="50" r="10" stroke="currentColor" stroke-width="2"/>
+                        <line x1="50" y1="0" x2="50" y2="40" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                <!-- Floating Decorative elements -->
+                <div class="absolute -top-10 -right-10 w-24 h-24 border border-brand-primary/30 rounded-full animate-spin-slow"></div>
+                <div class="absolute -bottom-6 -left-6 w-16 h-16 border-2 border-brand-primary/20 rounded-lg rotate-45"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Giới thiệu (Intro) -->
+    <section id="gioi-thieu" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="mb-4 text-brand-primary font-semibold text-sm tracking-widest reveal">01 / GIỚI THIỆU</div>
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal delay-100">
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6 leading-tight">
+                        Giữa sự chính xác <br><span class="text-brand-primary">và tinh thần học hỏi.</span>
+                    </h2>
+                    <p class="text-xl text-brand-text/80 font-serif italic border-l-4 border-brand-primary pl-6">
+                        "Công việc cho tôi trải nghiệm thực tế. Việc học mở thêm những góc nhìn mới."
+                    </p>
+                </div>
+                <div class="space-y-6 text-brand-text/80 leading-relaxed reveal delay-200">
+                    <p>
+                        Tôi là <strong>Nguyễn Thị Thanh Vân</strong>, sinh ngày 29/10/2000. Hiện tôi làm việc tại Công ty TNHH Cơ khí và Thương mại Nhật Tinh với vai trò nhân viên kiểm tra chất lượng sản phẩm cơ khí (QC).
+                    </p>
+                    <p>
+                        Trước khi đến với Nhật Tinh, tôi đã làm việc tại Công ty TNHH TM DV SX Việt Lê, doanh nghiệp sản xuất các loại bánh ngọt. Từ năm 2019 đến nay, hành trình nghề nghiệp của tôi tiếp tục trong lĩnh vực cơ khí, gắn liền với các dụng cụ đo, bản vẽ kỹ thuật và các nhóm sản phẩm cụ thể.
+                    </p>
+                    <p>
+                        Song song với công việc, tôi đang theo học ngành Thương mại điện tử tại Đại học Kinh tế TP.HCM (UEH). Hai hành trình được diễn ra cùng lúc, giúp tôi vừa tích lũy kinh nghiệm thực tế, vừa tiếp cận thêm những kiến thức mới.
+                    </p>
+                    
+                    <div class="pt-6 mt-6 border-t border-gray-100 text-sm">
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <li><span class="font-medium">Họ tên:</span> Nguyễn Thị Thanh Vân</li>
+                            <li><span class="font-medium">Ngày sinh:</span> 29/10/2000</li>
+                            <li><span class="font-medium">Công việc:</span> Nhân viên QC cơ khí</li>
+                            <li><span class="font-medium">Đơn vị:</span> Công ty Nhật Tinh</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-sm text-brand-text/50 mt-20 italic reveal delay-300">Để hiểu rõ hơn về công việc hiện tại, hãy cùng nhìn lại những chặng đường tôi đã đi qua.</p>
+        </div>
+    </section>
+
+    <!-- Hành trình (Journey) -->
+    <section id="hanh-trinh" class="py-24 bg-brand-light relative">
+        <div class="max-w-4xl mx-auto px-6 md:px-12">
+            <div class="mb-4 text-brand-primary font-semibold text-sm tracking-widest text-center reveal">02 / HÀNH TRÌNH</div>
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6 text-center reveal delay-100">
+                Mỗi chặng đường,<br>một phần kinh nghiệm.
+            </h2>
+            <p class="text-center text-brand-text/70 mb-16 max-w-2xl mx-auto reveal delay-200">
+                Từ môi trường sản xuất bánh ngọt đến lĩnh vực cơ khí, quá trình làm việc của tôi được tiếp nối qua những môi trường và yêu cầu công việc khác nhau.
+            </p>
+
+            <div class="relative border-l-2 border-brand-primary/30 ml-4 md:ml-0 md:left-1/2 md:-translate-x-1/2 space-y-16">
+                
+                <!-- Item 1: Việt Lê -->
+                <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center w-full reveal">
+                    <div class="absolute w-4 h-4 rounded-full bg-brand-light border-4 border-brand-primary -left-[27px] md:left-1/2 md:-translate-x-1/2 z-10"></div>
+                    <div class="pl-8 md:pl-0 md:w-[45%] text-left md:text-right mb-4 md:mb-0">
+                        <span class="inline-block px-3 py-1 bg-white rounded-full text-sm font-semibold text-brand-primary mb-2 shadow-sm">Trước năm 2019</span>
+                        <h3 class="text-xl font-bold text-brand-dark">Công ty TNHH TM DV SX Việt Lê</h3>
+                        <p class="text-brand-text/60 font-medium text-sm">Sản xuất các loại bánh ngọt</p>
+                    </div>
+                    <div class="pl-8 md:pl-0 md:w-[45%] text-brand-text/80 text-sm leading-relaxed">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            Trước khi gia nhập Nhật Tinh, tôi đã có thời gian làm việc tại Công ty TNHH TM DV SX Việt Lê, doanh nghiệp chuyên sản xuất các loại bánh ngọt. Đây là chặng đường làm việc trước khi tôi chuyển sang lĩnh vực cơ khí.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Nhật Tinh -->
+                <div class="relative flex flex-col md:flex-row-reverse md:justify-between items-start md:items-center w-full reveal delay-100">
+                    <div class="absolute w-4 h-4 rounded-full bg-brand-primary shadow-[0_0_10px_rgba(67,97,238,0.5)] -left-[27px] md:left-1/2 md:-translate-x-1/2 z-10"></div>
+                    <div class="pl-8 md:pl-0 md:w-[45%] text-left mb-4 md:mb-0">
+                        <span class="inline-block px-3 py-1 bg-brand-primary text-white rounded-full text-sm font-semibold mb-2 shadow-sm">2019 — Hiện tại (Đang làm việc)</span>
+                        <h3 class="text-xl font-bold text-brand-dark">Công ty TNHH Cơ khí và Thương mại Nhật Tinh</h3>
+                        <p class="text-brand-text/60 font-medium text-sm">Nhân viên kiểm tra chất lượng sản phẩm cơ khí (QC)</p>
+                    </div>
+                    <div class="pl-8 md:pl-0 md:w-[45%] text-brand-text/80 text-sm leading-relaxed md:text-right">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            Từ năm 2019, tôi làm việc tại Nhật Tinh với vai trò nhân viên kiểm tra chất lượng sản phẩm cơ khí. Công việc của tôi gắn liền với việc sử dụng dụng cụ đo và đọc bản vẽ kỹ thuật để phục vụ kiểm tra sản phẩm.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-sm text-brand-primary font-medium mt-20 reveal delay-200">Trong công việc hiện tại, dụng cụ đo, bản vẽ và đặc điểm của từng nhóm sản phẩm là những nội dung tôi thường xuyên tiếp cận.</p>
+        </div>
+    </section>
+
+    <!-- Chuyên môn (Expertise) -->
+    <section id="chuyen-mon" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="mb-4 text-brand-primary font-semibold text-sm tracking-widest reveal">03 / CHUYÊN MÔN</div>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 reveal delay-100">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark leading-tight max-w-lg">
+                    Từ yêu cầu trên bản vẽ <br><span class="text-brand-primary">đến từng chi tiết sản phẩm.</span>
+                </h2>
+                <p class="text-brand-text/70 max-w-md">
+                    Công việc QC cơ khí kết nối thông tin trên bản vẽ với việc kiểm tra sản phẩm thực tế. Những nội dung chuyên môn dưới đây là phần gắn liền với công việc hiện tại của tôi.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="group bg-brand-light rounded-3xl p-8 transition-all hover:bg-[#f0e8de] hover:text-brand-dark hover:-translate-y-2 hover:shadow-2xl duration-300 cursor-default reveal">
+                    <div class="text-5xl text-brand-primary opacity-20 font-serif font-bold mb-4 group-hover:opacity-40 transition-opacity">01</div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-dark transition-colors">Những công cụ được sử dụng trong công việc kiểm tra.</h3>
+                    <p class="text-brand-text/70 group-hover:text-gray-300 text-sm mb-6 leading-relaxed">
+                        Tôi sử dụng thước cặp, pamme và máy đo Keyence trong công việc kiểm tra chất lượng sản phẩm cơ khí. Đây là những công cụ tôi đã có được kinh nghiệm khi sử dụng trong môi trường làm việc thực tế.
+                    </p>
+                    <ul class="space-y-2 font-medium">
+                        <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-brand-primary group-hover:text-brand-light"></i> Thước cặp</li>
+                        <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-brand-primary group-hover:text-brand-light"></i> Pamme</li>
+                        <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-brand-primary group-hover:text-brand-light"></i> Máy đo Keyence</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group bg-brand-light rounded-3xl p-8 transition-all hover:bg-[#f0e8de] hover:text-brand-dark hover:-translate-y-2 hover:shadow-2xl duration-300 cursor-default reveal delay-100">
+                    <div class="text-5xl text-brand-primary opacity-20 font-serif font-bold mb-4 group-hover:opacity-40 transition-opacity">02</div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-dark transition-colors">Đọc bản vẽ để tiếp cận yêu cầu sản phẩm.</h3>
+                    <p class="text-brand-text/70 group-hover:text-gray-300 text-sm mb-6 leading-relaxed">
+                        Tôi có khả năng đọc bản vẽ kỹ thuật của các nước như: Việt Nam, Nhật Bản và Mỹ để phục vụ công việc. Bản vẽ là phần thông tin quan trọng giúp kết nối yêu cầu kỹ thuật với chi tiết cần kiểm tra.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white/50 group-hover:bg-white/10 rounded-full text-xs font-semibold border border-gray-200 group-hover:border-gray-600 transition-colors">Việt Nam</span>
+                        <span class="px-3 py-1 bg-white/50 group-hover:bg-white/10 rounded-full text-xs font-semibold border border-gray-200 group-hover:border-gray-600 transition-colors">Nhật Bản</span>
+                        <span class="px-3 py-1 bg-white/50 group-hover:bg-white/10 rounded-full text-xs font-semibold border border-gray-200 group-hover:border-gray-600 transition-colors">Mỹ</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group bg-brand-light rounded-3xl p-8 transition-all hover:bg-[#f0e8de] hover:text-brand-dark hover:-translate-y-2 hover:shadow-2xl duration-300 cursor-default reveal delay-200">
+                    <div class="text-5xl text-brand-primary opacity-20 font-serif font-bold mb-4 group-hover:opacity-40 transition-opacity">03</div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-dark transition-colors">Kinh nghiệm gắn với các nhóm sản phẩm.</h3>
+                    <p class="text-brand-text/70 group-hover:text-gray-300 text-sm mb-6 leading-relaxed">
+                        Những nhóm sản phẩm chủ lực trong công việc của tôi gồm lắp ráp khuôn, lắp ráp linh kiện cơ khí và gia công dựa trên bản vẽ theo yêu cầu của khách hàng.
+                    </p>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="ph-fill ph-caret-right text-brand-primary group-hover:text-brand-light mt-0.5"></i> 
+                            <span>Lắp ráp khuôn</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ph-fill ph-caret-right text-brand-primary group-hover:text-brand-light mt-0.5"></i> 
+                            <span>Lắp ráp linh kiện cơ khí</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ph-fill ph-caret-right text-brand-primary group-hover:text-brand-light mt-0.5"></i> 
+                            <span>Gia công theo yêu cầu của khách hàng</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Học tập (Education) -->
+    <section id="hoc-tap" class="py-24 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1 relative reveal">
+                <!-- Image Wrapper -->
+                <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-square md:aspect-auto md:h-[600px]">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" alt="Không gian học tập" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent flex flex-col justify-end p-8 text-white">
+                        <p class="font-serif font-bold text-3xl mb-1">UEH</p>
+                        <p class="text-sm font-medium text-white/80 uppercase tracking-wider">Đại học Kinh tế TP.HCM</p>
+                    </div>
+                </div>
+                <!-- Floating decorative card -->
+                <div class="absolute -bottom-8 -right-8 bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hidden md:block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center text-brand-primary text-2xl">
+                            <i class="ph-fill ph-student"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-brand-dark">Ngành Thương mại điện tử</p>
+                            <p class="text-xs text-brand-text/60 font-medium">Đang theo học</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2 reveal delay-100">
+                <div class="mb-4 text-brand-primary font-semibold text-sm tracking-widest">05 / HỌC TẬP</div>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-8 leading-tight">
+                    Tiếp tục học,<br>để mở thêm <br><span class="text-brand-primary">những góc nhìn.</span>
+                </h2>
+                
+                <div class="space-y-6 text-brand-text/80 leading-relaxed">
+                    <p>
+                        Bên cạnh công việc tại Nhật Tinh, tôi đang theo học ngành Thương mại điện tử tại Đại học Kinh tế TP.HCM (UEH). Quá trình học tập mang đến cho tôi nhiều kiến thức mới và giúp tôi hiểu thêm về hoạt động kinh doanh trong môi trường số.
+                    </p>
+                    <p>
+                        Nếu công việc là nơi tôi tích lũy trải nghiệm thực tế, thì giảng đường là nơi tôi tiếp cận thêm những cách nhìn và cách đặt vấn đề mới. Việc vừa làm vừa học giúp hai hành trình ấy được tiếp nối trong cuộc sống hằng ngày.
+                    </p>
+                    <p>
+                        Tôi mong muốn từng bước kết nối những điều đã trải nghiệm với kiến thức được học, tiếp tục hoàn thiện bản thân và chuẩn bị cho những cơ hội phù hợp trong tương lai.
+                    </p>
+                </div>
+
+                <div class="mt-10 inline-flex items-center gap-3 text-sm font-semibold text-brand-dark bg-white px-5 py-3 rounded-full shadow-sm border border-gray-100">
+                    <i class="ph-fill ph-star text-brand-primary"></i>
+                    Kinh nghiệm thực tế · Kiến thức mới · Hành trình tiếp nối
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liên hệ & Khoảng trời riêng (Contact & Interactive Stars) -->
+    <section id="lien-he" class="relative py-24 md:py-32 bg-gradient-to-br from-brand-contactStart to-brand-contactEnd overflow-hidden text-brand-dark">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="mb-16 text-center">
+                <p class="mb-3 text-brand-primary font-semibold text-sm tracking-widest uppercase">Khoảng trời riêng</p>
+                <h3 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark">Chạm vào một ngôi sao</h3>
+                <p class="mt-3 text-brand-text/70">Mỗi lần chạm, một ánh sao khẽ bừng sáng.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+            
+            <!-- Left Text Content -->
+            <div class="reveal">
+                <div class="mb-6 text-brand-primary font-semibold text-sm tracking-widest uppercase">06 / Kết nối & Khoảng trời riêng</div>
+                <h2 class="font-serif text-5xl md:text-7xl font-bold mb-8 leading-tight text-brand-dark drop-shadow-lg">
+                    Một lời chào,<br>mở đầu một<br>cuộc trò chuyện.
+                </h2>
+                <p class="text-lg text-brand-text/80 leading-relaxed mb-6 max-w-lg">
+                    Cảm ơn bạn đã dành thời gian tìm hiểu hành trình của tôi, từ những trải nghiệm trong công việc đến quá trình học tập tại UEH. Nếu bạn muốn trao đổi thêm về công việc, học tập hoặc những cơ hội phù hợp, tôi rất vui được kết nối.
+                </p>
+            </div>
+
+            <!-- Right Glass Card -->
+            <div class="reveal delay-200">
+                <div class="glass-card-dark p-8 md:p-12 rounded-[2rem]">
+                    <div class="mb-8 overflow-hidden">
+                        <p class="text-sm font-medium text-brand-text/60 mb-2 uppercase tracking-wide">Email liên hệ</p>
+                        <a href="mailto:thanhvan291020@gmail.com" class="text-2xl md:text-4xl font-bold text-brand-dark hover:text-brand-primary transition-colors break-words">
+                            thanhvan291020@gmail.com
+                        </a>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 mb-10">
+                        <a href="mailto:thanhvan291020@gmail.com" class="px-8 py-4 bg-brand-primary text-white rounded-full font-bold hover:opacity-90 transition-colors shadow-lg">
+                            Gửi email cho tôi
+                        </a>
+                        <button onclick="copyEmail()" id="copy-btn" class="px-8 py-4 border border-brand-dark/15 text-brand-dark rounded-full font-medium hover:bg-white transition-colors flex items-center gap-2">
+                            <span>Sao chép email</span>
+                            <i class="ph ph-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="pt-6 border-t border-brand-dark/10 text-sm text-brand-text/60">
+                        <span class="flex items-center gap-2 w-fit">
+                            <i class="ph-fill ph-facebook-logo text-xl"></i>
+                            Facebook cá nhân · Đang cập nhật
+                        </span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="star-canvas" class="star-container star-field" role="group" aria-label="Các ngôi sao rơi trên trang. Bấm hoặc chạm để xem hiệu ứng và nghe âm thanh."></div>
+
+    <footer class="bg-brand-contactStart border-t border-brand-dark/10 py-8">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-text/60">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="font-serif font-bold text-brand-dark text-lg">Thanh Vân</span>
+                <span>Chỉn chu trong công việc. Học hỏi trong học tập.</span>
+            </div>
+            <div class="text-center md:text-right">
+                <p>&copy; <span id="year"></span> Nguyễn Thị Thanh Vân.</p>
+                <a href="#" class="hover:text-brand-primary transition-colors mt-1 inline-block">Về đầu trang ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // 2. Set Current Year in Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 3. Scroll Reveal Animation using IntersectionObserver
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 4. Navbar Glass Effect on Scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('bg-transparent', 'glass-nav');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // 5. Copy Email Functionality
+        function copyEmail() {
+            const email = "thanhvan291020@gmail.com";
+            const btn = document.getElementById('copy-btn');
+            const originalText = btn.innerHTML;
+            
+            navigator.clipboard.writeText(email).then(() => {
+                btn.innerHTML = `<span>Đã sao chép!</span> <i class="ph-fill ph-check-circle text-green-400"></i>`;
+                btn.classList.replace('border-white/30', 'border-green-400/50');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('border-green-400/50', 'border-white/30');
+                }, 2000);
+            }).catch(err => {
+                // Fallback for iFrame restrictions
+                const textArea = document.createElement("textarea");
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    btn.innerHTML = `<span>Đã sao chép!</span> <i class="ph-fill ph-check-circle text-green-400"></i>`;
+                } catch (err) {
+                    btn.innerHTML = `<span>Lỗi sao chép</span>`;
+                }
+                document.body.removeChild(textArea);
+                setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+            });
+        }
+
+        // 6. Interactive Star Engine & Web Audio API
+        const canvas = document.getElementById('star-canvas');
+        const AudioCtor = window.AudioContext || window.webkitAudioContext;
+        const audioNotes = [523.25, 587.33, 659.25, 783.99, 880];
+        let audioCtx = null;
+        let lastChimeAt = 0;
+
+        async function playChime() {
+            if (!AudioCtor || Date.now() - lastChimeAt < 120) return;
+            lastChimeAt = Date.now();
+
+            try {
+                if (!audioCtx) audioCtx = new AudioCtor();
+                if (audioCtx.state === 'suspended') {
+                    await audioCtx.resume();
+                }
+
+                const oscillator = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const start = audioCtx.currentTime + 0.42;
+                const note = audioNotes[Math.floor(Math.random() * audioNotes.length)];
+
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(note, start);
+                oscillator.frequency.exponentialRampToValueAtTime(note * 1.12, start + 0.12);
+                gain.gain.setValueAtTime(0.0001, start);
+                gain.gain.linearRampToValueAtTime(0.055, start + 0.025);
+                gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.32);
+                oscillator.connect(gain);
+                gain.connect(audioCtx.destination);
+                oscillator.start(start);
+                oscillator.stop(start + 0.34);
+            } catch (error) {
+                console.warn('Âm thanh không khả dụng trên trình duyệt này:', error);
+            }
+        }
+
+        function createExplosion(x, y) {
+            const colors = ['#A77C5B', '#D6C1AB', '#F5F2EB'];
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('span');
+                const angle = (Math.PI * 2 * i) / 8;
+                const distance = 24 + Math.random() * 24;
+                particle.className = 'particle';
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
+                particle.style.setProperty('--ty', `${Math.sin(angle) * distance}px`);
+                particle.style.backgroundColor = colors[i % colors.length];
+                canvas.appendChild(particle);
+                particle.addEventListener('animationend', () => particle.remove(), { once: true });
+                window.setTimeout(() => particle.remove(), 600);
+            }
+        }
+
+        const starShapes = [
+            `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 14.5 9.5 24 12 14.5 14.5 12 24 9.5 14.5 0 12 9.5 9.5 12 0Z"/></svg>`,
+            `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.8 6.6 7.2.7-5.5 4.7 1.7 7L12 17.3 5.8 21l1.7-7L2 9.3l7.2-.7L12 2Z"/></svg>`,
+            `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c0 0 0 8 8 10-8 2-8 10-8 10S12 14 4 12c8-2 8-10 8-10Z"/></svg>`
+        ];
+
+        function initStars() {
+            if (!canvas) return;
+
+            const isMobile = window.matchMedia('(max-width: 700px)').matches;
+            const lanes = isMobile
+                ? [10, 90, 30, 70]
+                : [7, 93, 22, 78, 38, 62, 15, 85];
+            const count = lanes.length;
+            canvas.replaceChildren();
+
+            for (let index = 0; index < count; index += 1) {
+                const star = document.createElement('button');
+                const size = 34 + (index % 3) * 7;
+                const duration = 12 + (index % 4) * 1.5;
+                const x = `${lanes[index]}%`;
+                star.type = 'button';
+                star.className = 'star';
+                star.setAttribute('aria-label', `Chạm để làm sáng ngôi sao ${index + 1} và nghe âm thanh`);
+                star.style.setProperty('--size', `${size}px`);
+                star.style.setProperty('--x', x);
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.setProperty('--delay', `${-((index / count) * duration)}s`);
+                star.innerHTML = starShapes[index % starShapes.length];
+
+                star.addEventListener('click', () => {
+                    if (star.classList.contains('is-burst')) return;
+
+                    const starRect = star.getBoundingClientRect();
+                    const fieldRect = canvas.getBoundingClientRect();
+                    const centerX = starRect.left - fieldRect.left + starRect.width / 2;
+                    const centerY = starRect.top - fieldRect.top + starRect.height / 2;
+
+                    star.classList.add('is-burst');
+                    playChime();
+                    createExplosion(centerX, centerY);
+                    window.setTimeout(() => star.classList.remove('is-burst'), 440);
+                });
+
+                canvas.appendChild(star);
+            }
+
+        }
+
+        if (canvas) {
+            initStars();
+            document.addEventListener('visibilitychange', () => {
+                canvas.classList.toggle('is-inactive', document.hidden);
+            });
+        }
+    </script>
+</body>
+</html>

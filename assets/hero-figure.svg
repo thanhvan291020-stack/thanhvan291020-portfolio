@@ -1,0 +1,63 @@
+<svg width="900" height="1000" viewBox="0 0 900 1000" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Minh họa công việc QC cơ khí">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f5f2eb"/>
+      <stop offset="100%" stop-color="#dfe3e7"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#d6d9e0"/>
+      <stop offset="100%" stop-color="#8a8f98"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1000" rx="48" fill="url(#bg)"/>
+  <g opacity="0.55" stroke="#191a1d" stroke-width="2" fill="none">
+    <path d="M120 140 H790"/>
+    <path d="M120 220 H790"/>
+    <path d="M120 300 H790"/>
+    <path d="M140 100 V900"/>
+    <path d="M270 100 V900"/>
+    <path d="M400 100 V900"/>
+    <path d="M530 100 V900"/>
+    <path d="M660 100 V900"/>
+  </g>
+  <g transform="translate(120 160)">
+    <rect x="120" y="160" width="420" height="210" rx="28" fill="#ffffff" stroke="#191a1d" stroke-opacity="0.18"/>
+    <g transform="translate(150 188)">
+      <rect x="0" y="0" width="170" height="120" rx="20" fill="#f3f5f6" stroke="#191a1d" stroke-opacity="0.18"/>
+      <rect x="25" y="28" width="120" height="64" rx="12" fill="url(#metal)"/>
+      <path d="M58 28 V92" stroke="#191a1d" stroke-opacity="0.35" stroke-width="3"/>
+      <path d="M88 28 V92" stroke="#191a1d" stroke-opacity="0.35" stroke-width="3"/>
+      <path d="M118 28 V92" stroke="#191a1d" stroke-opacity="0.35" stroke-width="3"/>
+      <circle cx="132" cy="32" r="12" fill="#191a1d" fill-opacity="0.6"/>
+    </g>
+    <g transform="translate(325 188)">
+      <rect x="0" y="0" width="150" height="120" rx="22" fill="#f3f5f6" stroke="#191a1d" stroke-opacity="0.18"/>
+      <path d="M36 88 L58 34 L90 34 L112 88" fill="none" stroke="#191a1d" stroke-opacity="0.6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M46 64 H102" stroke="#191a1d" stroke-opacity="0.5" stroke-width="4"/>
+      <circle cx="60" cy="28" r="10" fill="#191a1d" fill-opacity="0.6"/>
+      <circle cx="90" cy="28" r="10" fill="#191a1d" fill-opacity="0.6"/>
+    </g>
+    <g transform="translate(60 50)">
+      <circle cx="280" cy="70" r="62" fill="#24262b"/>
+      <circle cx="280" cy="70" r="44" fill="#dfe3e7"/>
+      <path d="M223 90 L280 40 L338 90" fill="none" stroke="#24262b" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M249 114 H311" stroke="#24262b" stroke-width="12" stroke-linecap="round"/>
+      <path d="M260 124 L280 154 L300 124" fill="none" stroke="#24262b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g transform="translate(126 540)">
+    <rect x="0" y="0" width="650" height="240" rx="28" fill="#fff" stroke="#191a1d" stroke-opacity="0.12"/>
+    <rect x="50" y="42" width="220" height="150" rx="18" fill="#f3f5f6"/>
+    <g transform="translate(86 64)">
+      <path d="M14 90 L54 20 L92 20 L132 90" fill="none" stroke="#191a1d" stroke-opacity="0.7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M40 56 H106" stroke="#191a1d" stroke-opacity="0.7" stroke-width="6"/>
+    </g>
+    <g transform="translate(320 42)">
+      <rect x="0" y="0" width="250" height="150" rx="18" fill="#f3f5f6"/>
+      <path d="M24 118 H220" stroke="#191a1d" stroke-opacity="0.45" stroke-width="2"/>
+      <path d="M48 98 L65 52 L84 52 L108 98" fill="none" stroke="#191a1d" stroke-opacity="0.7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M110 98 L134 54 L156 54 L180 98" fill="none" stroke="#191a1d" stroke-opacity="0.7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M178 98 L194 72 L214 72" fill="none" stroke="#191a1d" stroke-opacity="0.7" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
